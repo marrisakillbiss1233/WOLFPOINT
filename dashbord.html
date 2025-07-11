@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank of America | My Accounts</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="security-warning.js"></script>
+
+    <!-- Font Awesome for icons -->
+    
+    
+    <style>
+        /* Global Styles */
+        :root {
+            --boa-green: green;
+            --boa-green-dark: green;
+            --boa-green-light:green;
+            --boa-green: #008a00;
+            --boa-gray: #f5f5f5;
+            --boa-gray-dark: #666;
+            --boa-text: #333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: var(--boa-gray);
+            color: var(--boa-text);
+            line-height: 1.5;
+        }
+        
+        a {
+            color: var(--boa-green-light);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--boa-green);
+            color: white;
+            border: 1px solid var(--boa-green);
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--boa-green-dark);
+            text-decoration: none;
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--boa-green);
+            border: 1px solid var(--boa-green);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--boa-gray);
+            text-decoration: none;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: white;
+            
+            position: sticky;
+            top: 0;
+            display: flex;
+            color:green!important;
+            justify-content: space-between;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+        
+        .logo img {
+            height: 80px;
+            padding-top: 10px;
+            width: auto;
+        }
+        
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .header-nav a {
+           color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .header-nav a:hover {
+            color: var(--boa-green-light);
+        }
+        
+        /* Main Navigation */
+        
+       .main-nav {
+            background-color:darkgreen;
+        }
+        
+        .main-nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 15px;
+        }
+        
+        .nav-menu {
+            display: flex;
+           
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-menu li {
+            position: center;
+        }
+        
+        .nav-menu li a {
+            color: white;
+            padding: 14px 16px;
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .nav-menu li a:hover {
+            background-color: var(--boa-green-dark);
+        }
+        
+        .header-nav a {
+            
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 14px 16px;
+        }
+        
+        .header-nav a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Mobile styles */
+        @media (max-width: 991.98px) {
+            .main-nav-container {
+                flex-direction: column;
+                padding: 0;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .header-nav {
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .navbar-toggler {
+                align-self: flex-start;
+                margin: 10px 15px;
+            }
+        }
+        
+        /* Dashboard Page Styles */
+        .dashboard-page {
+            padding: 30px 0;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        
+        .dashboard-title {
+            font-size: 24px;
+            color: var(--boa-green);
+            font-weight: 600;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--boa-green);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .alert-banner {
+            background-color: #fff8e6;
+            border-left: 4px solid #ffc107;
+            padding: 16px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .alert-icon {
+            color: #ffc107;
+            font-size: 20px;
+        }
+        
+        .alert-content h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        
+        .alert-content p {
+            font-size: 14px;
+            color: var(--boa-gray-dark);
+        }
+        
+        .account-summary {
+            background-color: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            color: var(--boa-green);
+            font-weight: 600;
+        }
+        
+        .account-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .account-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .account-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .account-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--boa-green);
+            margin-bottom: 8px;
+        }
+        
+        .account-number {
+            font-size: 12px;
+            color: var(--boa-gray-dark);
+            margin-bottom: 12px;
+        }
+        
+        .account-balance {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+        
+        .account-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .account-action {
+            padding: 6px 12px;
+            background-color: var(--boa-gray);
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .quick-actions {
+            background-color: white;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+        
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 16px 8px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .action-item:hover {
+            border-color: var(--boa-green-light);
+            background-color: #f9f9f9;
+        }
+        
+        .action-icon {
+            font-size: 24px;
+            color: var(--boa-green);
+            margin-bottom: 8px;
+        }
+        
+        .action-label {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .recent-transactions {
+            background-color: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .transactions-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .transactions-table th {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 2px solid #eee;
+            font-size: 14px;
+            color: var(--boa-gray-dark);
+            font-weight: 500;
+        }
+        
+        .transactions-table td {
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+        }
+        
+        .transaction-date {
+            color: var(--boa-gray-dark);
+        }
+        
+        .transaction-description {
+            font-weight: 500;
+        }
+        
+        .transaction-amount.cgreenit {
+            color: var(--boa-green);
+        }
+        
+        .transaction-amount.debit {
+            color: var(--boa-green);
+        }
+        
+        /* Footer Styles */
+        .footer {
+            background-color: #f0f0f0;
+            padding: 40px 0 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 16px;
+            margin-bottom: 16px;
+            padding-left: 0!important;
+            color: var(--boa-green);
+            font-weight: 600;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-column a {
+            color: var(--boa-gray-dark);
+            font-size: 14px;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: var(--boa-gray-dark);
+            font-size: 13px;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .account-cards, .action-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .nav-menu {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+            }
+            
+            .account-cards, .action-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+
+        a {
+            color: var(--boa-green-light);
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .modal-title {
+            font-size: 22px;
+            color: var(--boa-green);
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--boa-gray-dark);
+        }
+        
+        .close-modal:hover {
+            color: var(--boa-green);
+        }
+        
+        .login-attempts {
+            margin-bottom: 30px;
+        }
+        
+        .attempt-item {
+            display: flex;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .attempt-item.suspicious {
+            background-color: #fff5f5;
+            border-left: 4px solid var(--boa-green);
+        }
+        
+        .attempt-location {
+            flex: 1;
+        }
+        
+        .attempt-country {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .attempt-details {
+            color: var(--boa-gray-dark);
+            font-size: 14px;
+        }
+        
+        .attempt-status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background-color: #e6f7ee;
+            color: #008a00;
+        }
+        
+        .status-failed {
+            background-color: #fff5f5;
+            color: var(--boa-green);
+        }
+        
+        .map-container {
+            height: 300px;
+            background-color: #f9f9f9;
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--boa-gray-dark);
+            font-size: 16px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        /* Security Warning Modal */
+        .security-warning-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        
+        .security-warning-content {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        
+        .security-warning-icon {
+            font-size: 48px;
+            color: var(--boa-green);
+            margin-bottom: 20px;
+        }
+        
+        .security-warning-title {
+            font-size: 22px;
+            color: var(--boa-green);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .security-warning-message {
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="green_wolfpoint.jpg" alt="Wolf Point Federal Cgreenit Union">
+            </div>
+            
+            <nav class="header-nav">
+                <a href="#"><i class="fas fa-search"></i> Search</a>
+                <a href="#"><i class="fas fa-phone-alt"></i> Contact Us</a>
+                <a href="#"><i class="fas fa-map-marker-alt"></i> Locations</a>
+            </nav>
+        </div>
+    </header>
+    
+    <!-- Main Navigation -->
+   <nav class="main-nav navbar navbar-expand-lg">
+        <div class="container-fluid main-nav-container">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" style="background-color: white;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarContent" style="padding-left: 18%; padding-right: 15%;">
+                <ul class="nav-menu navbar-nav me-auto mb-2 mb-lg-0" style="display: flex; justify-content: space-between;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Banking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Credit Cards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home Loans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Auto Loans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Investing</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Wealth Management</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Small Business</a>
+                    </li>
+                </ul>
+                
+                
+            </div>
+        </div>
+    </nav>
+
+    
+    <!-- Dashboard Page -->
+    <section class="dashboard-page" id="dashboardPage">
+        <div class="container">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Hello</h1>
+                
+                <div class="user-profile">
+                    <div class="user-avatar">LK</div>
+                    <span>Lavern Lee Knoble</span>
+                </div>
+            </div>
+            
+            
+
+            <div class="modal" id="securityModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Recent Login Activity</h2>
+                <span class="close-modal">&times;</span>
+            </div>
+            
+           
+            
+            <div class="login-attempts">
+                <h3 style="margin-bottom: 20px; color: var(--boa-green);">Suspicious Login Attempts</h3>
+                
+                <div class="attempt-item suspicious">
+                    <div class="attempt-location">
+                        <div class="attempt-country">North Korea (Pyongyang)</div>
+                        <div class="attempt-details">
+                            <span><i class="far fa-clock"></i> Today, 03:47 AM</span> • 
+                            <span><i class="fas fa-desktop"></i> Windows 10</span> • 
+                            <span><i class="fas fa-globe"></i> Chrome 112</span>
+                        </div>
+                    </div>
+                    <div class="attempt-status status-failed">
+                        Failed
+                    </div>
+                </div>
+                
+                <div class="attempt-item suspicious">
+                    <div class="attempt-location">
+                        <div class="attempt-country">China (Beijing)</div>
+                        <div class="attempt-details">
+                            <span><i class="far fa-clock"></i> Yesterday, 11:23 PM</span> • 
+                            <span><i class="fas fa-mobile-alt"></i> Android 11</span> • 
+                            <span><i class="fas fa-globe"></i> Firefox 109</span>
+                        </div>
+                    </div>
+                    <div class="attempt-status status-failed">
+                        Failed
+                    </div>
+                </div>
+                
+                <div class="attempt-item suspicious">
+                    <div class="attempt-location">
+                        <div class="attempt-country">Russia (Moscow)</div>
+                        <div class="attempt-details">
+                            <span><i class="far fa-clock"></i> Yesterday, 8:15 PM</span> • 
+                            <span><i class="fas fa-desktop"></i> Mac OS X</span> • 
+                            <span><i class="fas fa-globe"></i> Safari 15</span>
+                        </div>
+                    </div>
+                    <div class="attempt-status status-failed">
+                        Failed
+                    </div>
+                </div>
+                
+                <div class="attempt-item suspicious">
+                    <div class="attempt-location">
+                        <div class="attempt-country">Mexico (Mexico City)</div>
+                        <div class="attempt-details">
+                            <span><i class="far fa-clock"></i> Yesterday, 5:30 PM</span> • 
+                            <span><i class="fas fa-mobile-alt"></i> iPhone 12</span> • 
+                            <span><i class="fas fa-globe"></i> Chrome 112</span>
+                        </div>
+                    </div>
+                    <div class="attempt-status status-failed">
+                        Failed
+                    </div>
+                </div>
+            </div>
+            
+            <div class="login-attempts">
+                <h3 style="margin-bottom: 20px; color: var(--boa-green);">Your Recent Logins</h3>
+                
+                <div class="attempt-item">
+                    <div class="attempt-location">
+                        <div class="attempt-country">United States (New York)</div>
+                        <div class="attempt-details">
+                            <span><i class="far fa-clock"></i> Today, 9:15 AM</span> • 
+                            <span><i class="fas fa-mobile-alt"></i> iPhone 13</span> • 
+                            <span><i class="fas fa-globe"></i> Safari 15</span>
+                        </div>
+                    </div>
+                    <div class="attempt-status status-success">
+                        Success
+                    </div>
+                </div>
+                
+                <div class="attempt-item">
+                    <div class="attempt-location">
+                        <div class="attempt-country">United States (New York)</div>
+                        <div class="attempt-details">
+                            <span><i class="far fa-clock"></i> Yesterday, 7:30 PM</span> • 
+                            <span><i class="fas fa-desktop"></i> Mac OS X</span> • 
+                            <span><i class="fas fa-globe"></i> Chrome 112</span>
+                        </div>
+                    </div>
+                    <div class="attempt-status status-success">
+                        Success
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+            
+            <div class="account-summary">
+                <div class="section-header">
+                    <h2 class="section-title">Account Summary</h2>
+                    
+                </div>
+                
+                <div class="account-cards">
+                    <div class="account-card">
+                        <div class="account-name">Checking</div>
+                        <div class="account-number">••••• 7765</div>
+                        <div class="account-balance">$12520.00</div>
+                        <div class="account-actions">
+                            <a href="#" class="account-action">Transfer</a>
+                            <a href="History.html" class="account-action">Details</a>
+                        </div>
+                    </div>
+                    
+                    
+                    
+                    
+                </div>
+            </div>
+            
+            <div class="quick-actions">
+                <div class="section-header">
+                    <h2 class="section-title">Quick Actions</h2>
+                </div>
+                
+                <div class="action-grid">
+                    <a href="#" class="action-item">
+                        <div class="action-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="action-label">Transfer</div>
+                    </a>
+                    
+                    <a href="#" class="action-item">
+                        <div class="action-icon">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="action-label">Pay Bills</div>
+                    </a>
+                    
+                    <a href="#" class="action-item">
+                        <div class="action-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="action-label">Mobile Deposit</div>
+                    </a>
+                    
+                    <a href="#" class="action-item">
+                        <div class="action-icon">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="action-label">Send Money</div>
+                    </a>
+                    
+                    <a href="#" class="action-item">
+                        <div class="action-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <div class="action-label">Card Controls</div>
+                    </a>
+                    
+                    <a href="#" class="action-item">
+                        <div class="action-icon">
+                            <i class="fas fa-bell"></i>
+                        </div>
+                        <div class="action-label">Alerts</div>
+                    </a>
+                    
+                    <a href="#" class="action-item">
+                        <div class="action-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="action-label">Statements</div>
+                    </a>
+                    
+                    <a href="#" class="action-item">
+                        <div class="action-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <div class="action-label">Settings</div>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>Banking</h3>
+                    <ul style="padding:0px!important;">
+                        <li><a href="#">Checking Accounts</a></li>
+                        <li><a href="#">Savings Accounts</a></li>
+                        <li><a href="#">CDs & IRAs</a></li>
+                        <li><a href="#">Online Banking</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Cgreenit Cards</h3>
+                    <ul style="padding:0px!important;">
+                        <li><a href="#">View All Cgreenit Cards</a></li>
+                        <li><a href="#">Travel Rewards</a></li>
+                        <li><a href="#">Cash Back</a></li>
+                        <li><a href="#">Balance Transfer</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Lending</h3>
+                    <ul style="padding:0px!important;">
+                        <li><a href="#">Mortgage</a></li>
+                        <li><a href="#">Home Equity</a></li>
+                        <li><a href="#">Auto Loans</a></li>
+                        <li><a href="#">Personal Loans</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Investing</h3>
+                    <ul style="padding:0px!important;">
+                        <li><a href="#">Wealth Management</a></li>
+                        <li><a href="#">Retirement</a></li>
+                        <li><a href="#">Stocks & ETFs</a></li>
+                        <li><a href="#">Financial Planning</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul style="padding:0px!important;">
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Security Center</a></li>
+                        <li><a href="#">Branch/ATM Locator</a></li>
+                        <li><a href="#">Schedule Appointment</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Security Warning Modal -->
+            <div class="security-warning-modal" id="securityWarningModal">
+                <div class="security-warning-content">
+                    <div class="security-warning-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h2 class="security-warning-title">Security Warning</h2>
+                    <p class="security-warning-message">
+                        This action may compromise your security. We've detected potential risks associated with this operation.
+                        <br><br>
+                        Please contact support if you believe this is an error.
+                    </p>
+                    
+                </div>
+            </div>
+            
+            <script>
+                // Security Modal functionality
+                const reviewLink = document.getElementById('reviewActivity');
+                const securityModal = document.getElementById('securityModal');
+                const closeModal = document.querySelector('.close-modal');
+                const dismissAlert = document.getElementById('dismissAlert');
+                
+                reviewLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    securityModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                closeModal.addEventListener('click', function() {
+                    securityModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+                
+                dismissAlert.addEventListener('click', function() {
+                    securityModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    document.querySelector('.alert-banner').style.display = 'none';
+                });
+                
+                window.addEventListener('click', function(e) {
+                    if (e.target === securityModal) {
+                        securityModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                
+                // Security Warning Modal functionality
+                const securityWarningModal = document.getElementById('securityWarningModal');
+                const closeWarning = document.getElementById('closeWarning');
+                
+                // Show warning modal when clicking anywhere on the page
+                document.addEventListener('click', function(e) {
+                    // Don't show if clicking on the warning modal itself or its children
+                    if (e.target.closest('#securityWarningModal') || 
+                        e.target.closest('#reviewActivity') || 
+                        e.target.closest('#securityModal')) {
+                        return;
+                    }
+                    
+                    // Show the warning modal
+                    securityWarningModal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                closeWarning.addEventListener('click', function() {
+                    securityWarningModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+                
+                window.addEventListener('click', function(e) {
+                    if (e.target === securityWarningModal) {
+                        securityWarningModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+            <div class="footer-bottom">
+                © 2024 Bank of Wolf Point Federal Credit Union. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

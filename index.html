@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Login & Credit Cards</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Logo Styles */
+        .logo-container {
+            width: 100%;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .logo {
+            
+            height: 80px;
+            width: auto;
+            max-width: 100%;
+            
+        }
+        
+        /* Login Section */
+        .login-section {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .login-header {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .login-header h2 {
+            color: #0066cc;
+            font-size: 18px;
+        }
+        
+        .login-form input {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+        }
+        
+        .save-id {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .save-id input {
+            width: auto;
+            margin-right: 10px;
+            margin-bottom: 0;
+        }
+        
+        .login-button {
+            background-color:rgb(3, 56, 3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        
+        .login-links {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .login-links a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        
+        .error {
+            color: #cc0000;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .open-account {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .open-account a {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        /* Navigation Links */
+        .nav-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+            justify-content: center;
+        }
+        
+        .nav-links a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* Cards Section */
+        .cards-section h2 {
+            color: #0066cc;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+        
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .card-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 5px;
+        }
+        
+        .card-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .card-fee {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+        }
+        
+        /* Featured Cards */
+        .featured-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .featured-card {
+            background-color: white;
+            border-radius: 5px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .featured-card img {
+            width: 60px;
+            margin-right: 15px;
+        }
+        
+        .featured-card-content h3 {
+            color: #0066cc;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .featured-card-content p {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .featured-card-content a {
+            color: #cc0000;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .popup-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 5px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .popup-content h3 {
+            color: #cc0000;
+            margin-bottom: 15px;
+        }
+        
+        .popup-content p {
+            margin-bottom: 20px;
+        }
+        
+        .popup-button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        /* Loading Animation */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #0066cc;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            color: var(--boa-gray-dark);
+            font-size: 13px;
+        }
+        
+        .logo img {
+            height: 200px;
+            width: auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .login-header {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .login-header h2 {
+                margin-bottom: 10px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .featured-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .featured-card img {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Animation -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader"></div>
+    </div>
+    
+    <!-- Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-content">
+            <h3>Request Timeout</h3>
+            <p>Please log in first before accessing other sections of the website.</p>
+            <button class="popup-button" id="popupButton">OK</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Logo Section -->
+        <div class="logo-container">
+            <img src="green_wolfpoint.jpg" alt="Bank Logo" class="logo">
+        </div>
+        
+        <!-- Login Section -->
+        <div class="login-section">
+            <div class="login-header">
+                <h2>Checking</h2>
+                <h2>Savings & CDs</h2>
+            </div>
+            
+            <div class="login-form">
+                <label>User ID</label>
+                <input type="text" placeholder="User ID" id="userId">
+                
+                <label>Password</label>
+                <input type="password" placeholder="Password" id="password">
+                
+                <div class="save-id">
+                    <input type="checkbox" id="save-id">
+                    <label for="save-id">Save User ID</label>
+                </div>
+                
+                <button class="login-button" id="loginButton">Log in</button>
+                
+                <div class="login-links">
+                    <a href="#" class="protected-link">Forget User ID/Password?</a>
+                    <a href="#" class="protected-link">Security & Help</a>
+                </div>
+                
+            </div>
+        </div>
+        
+        <!-- Navigation Links -->
+        <div class="nav-links">
+            <a href="#" class="protected-link">Find your closest financial center or ATM</a>
+            <a href="#" class="protected-link">Schedule an Appointment</a>
+            <a href="#" class="protected-link">Credit Cards</a>
+            <a href="#" class="protected-link">Home Loans</a>
+            <a href="#" class="protected-link">Auto Loans</a>
+            <a href="#" class="protected-link">Investing</a>
+            <a href="#" class="protected-link">Better Money Habits®</a>
+        </div>
+        
+    </div>
+    <div class="footer-bottom">
+                © 2024 Bank of Wolf Point Federal Credit Union. All rights reserved.
+            </div>
+    <script>
+        // Show loading animation for 5 seconds when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }, 5000);
+            
+            // Get all protected links
+            const protectedLinks = document.querySelectorAll('.protected-link');
+            const popupOverlay = document.getElementById('popupOverlay');
+            const popupButton = document.getElementById('popupButton');
+            const loginButton = document.getElementById('loginButton');
+            
+            // Add click event to protected links
+            protectedLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    popupOverlay.style.display = 'flex';
+                });
+            });
+            
+            // Add click event to popup button
+            popupButton.addEventListener('click', function() {
+                popupOverlay.style.display = 'none';
+            });
+            
+            // Add click event to login button
+            loginButton.addEventListener('click', function() {
+                const userId = document.getElementById('userId').value;
+                const password = document.getElementById('password').value;
+                
+                // Validate credentials
+                if (userId === "lee143829" && password === "kno61325") {
+                    // Redirect to the dashboard page
+                    window.location.href = 'dashbord.html';
+                } else {
+                    alert('Invalid User ID or Password. Please try again.');
+                }
+            });
+            
+            // Make logo responsive
+            window.addEventListener('resize', function() {
+                const logo = document.querySelector('.logo');
+                const containerWidth = document.querySelector('.container').offsetWidth;
+                
+                if (containerWidth < 768) {
+                    logo.style.maxWidth = '80%';
+                } else {
+                    logo.style.maxWidth = '100%';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
